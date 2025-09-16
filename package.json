@@ -1,0 +1,27 @@
+{
+  "name": "bumbolandia-bank",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bumbolandia Bank - demo banking app with realtime updates",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": [
+    "bank",
+    "realtime",
+    "socket.io",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.18",
+    "express": "^5.1.0",
+    "nanoid": "^5.1.5",
+    "socket.io": "^4.8.1"
+  }
+}

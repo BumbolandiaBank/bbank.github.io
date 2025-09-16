@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: bumbolandia-bank
+    runtime: node
+    region: frankfurt
+    plan: free
+    repo: https://example.com/your-repo-url.git
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Bumbolandia Bank</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+	<header class="app-header">
+		<div class="brand">
+			<div class="logo">BB</div>
+			<div class="brand-text">
+				<div class="title">Bumbolandia Bank</div>
+				<div class="subtitle">Дубль — валюта будущего</div>
+			</div>
+		</div>
+		<nav class="top-actions">
+			<button id="btn-admin" class="btn ghost">Управление</button>
+			<button id="btn-logout" class="btn ghost hidden">Выйти</button>
+		</nav>
+	</header>
+
+	<main id="view-auth" class="view">
+		<section class="card">
+			<h1>Вход в Bumbolandia Bank</h1>
+			<p class="muted">Это демо. Введите имя, номер карты и CDS-код (произвольный).</p>
+			<form id="form-auth" class="form">
+				<label>Имя
+					<input name="name" required placeholder="Иван Дублянский" />
+				</label>
+				<label>Номер карты
+					<input name="cardNumber" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" />
+				</label>
+				<label>CDS-код
+					<input name="cds" inputmode="numeric" maxlength="4" placeholder="123" />
+				</label>
+				<button class="btn primary" type="submit">Войти</button>
+			</form>
+		</section>
+	</main>
+
+	<main id="view-app" class="view hidden">
+		<section class="grid">
+			<div class="card">
+				<h2>Мой аккаунт</h2>
+				<div class="kv"><span>Имя</span><strong id="me-name"></strong></div>
+				<div class="kv"><span>Карта</span>
+					<div class="inline-flex">
+						<strong id="me-card"></strong>
+						<button id="copy-card" class="btn small ghost" title="Копировать">Копировать</button>
+					</div>
+				</div>
+				<div class="balance">Баланс: <strong id="me-balance">0</strong> <span class="currency">DBL</span></div>
+			</div>
+			<div class="card">
+				<h2>Перевод</h2>
+				<form id="form-transfer" class="form">
+					<label>Карта получателя
+						<input id="to-card" name="toCardNumber" inputmode="numeric" maxlength="19" placeholder="0000 0000 0000 0000" required />
+					</label>
+					<label>Сумма в DBL
+						<input name="amount" inputmode="decimal" placeholder="100" required />
+					</label>
+					<button id="btn-transfer" class="btn primary" type="submit">Отправить</button>
+				</form>
+			</div>
+			<div class="card">
+				<h2>Последние операции</h2>
+				<ul id="tx-list" class="tx-list"></ul>
+			</div>
+		</section>
+	</main>
+
+	<!-- Admin modal -->
+	<div id="admin-modal" class="modal hidden">
+		<div class="modal-content">
+			<button id="admin-close" class="icon-btn" aria-label="Закрыть">✕</button>
+			<h2>Администрирование</h2>
+			<div id="admin-login">
+				<p class="muted">Введите код доступа для управления аккаунтами.</p>
+				<form id="form-admin-login" class="form">
+					<input name="code" type="password" placeholder="Access code" required />
+					<button class="btn primary" type="submit">Войти</button>
+				</form>
+			</div>
+			<div id="admin-panel" class="hidden">
+				<div class="accounts">
+					<div class="admin-toolbar">
+						<input id="admin-search" placeholder="Поиск по имени или карте" />
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Имя</th>
+								<th>Карта</th>
+								<th>Баланс</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="admin-rows"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="module" src="/app.js"></script>
+</body>
+</html>
